@@ -80,7 +80,7 @@ void UrlShortenHandler::ComposeUrls(
       "compose_urls_server",
       { opentracing::ChildOf(parent_span->get()) });
   opentracing::Tracer::Global()->Inject(span->context(), writer);
-  span->SetTag("ServiceVersion", 'v2');
+  span->SetTag("ServiceVersion", "v2");
 
   std::vector<Url> target_urls;
   std::future<void> mongo_future;

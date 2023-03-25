@@ -56,7 +56,7 @@ void PostStorageHandler::StorePost(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "store_post_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
-  span->SetTag("ServiceVersion", 'v2');
+  span->SetTag("ServiceVersion", "v2");
 
   mongoc_client_t *mongodb_client =
       mongoc_client_pool_pop(_mongodb_client_pool);
