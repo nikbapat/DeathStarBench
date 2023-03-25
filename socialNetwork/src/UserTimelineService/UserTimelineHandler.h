@@ -98,7 +98,7 @@ void UserTimelineHandler::WriteUserTimeline(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "write_user_timeline_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
-  span->SetTag("ServiceVersion", 'v1');
+  span->SetTag("ServiceVersion", 'v2');
 
   mongoc_client_t *mongodb_client =
       mongoc_client_pool_pop(_mongodb_client_pool);
@@ -195,7 +195,7 @@ void UserTimelineHandler::ReadUserTimeline(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "read_user_timeline_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
-  span->SetTag("ServiceVersion", 'v1');
+  span->SetTag("ServiceVersion", 'v2');
 
   if (stop <= start || start < 0) {
     return;

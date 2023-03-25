@@ -40,7 +40,7 @@ void MediaHandler::ComposeMedia(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "compose_media_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
-  span->SetTag("ServiceVersion", 'v1');
+  span->SetTag("ServiceVersion", 'v2');
 
   if (media_types.size() != media_ids.size()) {
     ServiceException se;
