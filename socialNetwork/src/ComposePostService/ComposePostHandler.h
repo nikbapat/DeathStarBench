@@ -117,6 +117,7 @@ Creator ComposePostHandler::_ComposeCreaterHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto user_client_wrapper = _user_service_client_pool->Pop();
   if (!user_client_wrapper) {
@@ -154,6 +155,7 @@ TextServiceReturn ComposePostHandler::_ComposeTextHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto text_client_wrapper = _text_service_client_pool->Pop();
   if (!text_client_wrapper) {
@@ -192,6 +194,7 @@ std::vector<Media> ComposePostHandler::_ComposeMediaHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto media_client_wrapper = _media_service_client_pool->Pop();
   if (!media_client_wrapper) {
@@ -230,6 +233,7 @@ int64_t ComposePostHandler::_ComposeUniqueIdHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto unique_id_client_wrapper = _unique_id_service_client_pool->Pop();
   if (!unique_id_client_wrapper) {
@@ -267,6 +271,7 @@ void ComposePostHandler::_UploadPostHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto post_storage_client_wrapper = _post_storage_client_pool->Pop();
   if (!post_storage_client_wrapper) {
@@ -300,6 +305,7 @@ void ComposePostHandler::_UploadUserTimelineHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto user_timeline_client_wrapper = _user_timeline_client_pool->Pop();
   if (!user_timeline_client_wrapper) {
@@ -334,6 +340,7 @@ void ComposePostHandler::_UploadHomeTimelineHelper(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto home_timeline_client_wrapper = _home_timeline_client_pool->Pop();
   if (!home_timeline_client_wrapper) {
@@ -370,6 +377,7 @@ void ComposePostHandler::ComposePost(
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto text_future =
       std::async(std::launch::async, &ComposePostHandler::_ComposeTextHelper,

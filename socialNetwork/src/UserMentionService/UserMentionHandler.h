@@ -49,6 +49,7 @@ void UserMentionHandler::ComposeUserMentions(
       "compose_user_mentions_server",
       {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   std::vector<UserMention> user_mentions;
   if (!usernames.empty()) {

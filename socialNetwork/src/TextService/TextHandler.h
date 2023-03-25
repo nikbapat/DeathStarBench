@@ -49,6 +49,7 @@ void TextHandler::ComposeText(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "compose_text_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   std::vector<std::string> mention_usernames;
   std::smatch m;

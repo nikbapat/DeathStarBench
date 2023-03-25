@@ -128,6 +128,7 @@ void UserHandler::RegisterUserWithId(
       "register_user_withid_server",
       {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   // Store user info into mongodb
   mongoc_client_t *mongodb_client =
@@ -242,6 +243,7 @@ void UserHandler::RegisterUser(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "register_user_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   // Compose user_id
   _thread_lock->lock();
@@ -387,6 +389,7 @@ void UserHandler::ComposeCreatorWithUsername(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "compose_creator_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   size_t user_id_size;
   uint32_t memcached_flags;
@@ -546,6 +549,7 @@ void UserHandler::ComposeCreatorWithUserId(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "compose_creator_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   Creator creator;
   creator.username = username;
@@ -756,6 +760,7 @@ int64_t UserHandler::GetUserId(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "get_user_id_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   size_t user_id_size;
   uint32_t memcached_flags;

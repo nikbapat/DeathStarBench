@@ -69,6 +69,7 @@ int64_t UniqueIdHandler::ComposeUniqueId(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "compose_unique_id_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   _thread_lock->lock();
   int64_t timestamp =

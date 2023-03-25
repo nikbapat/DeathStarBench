@@ -493,6 +493,7 @@ void SocialGraphHandler::GetFollowers(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "get_followers_server", {opentracing::ChildOf(parent_span->get())});
   opentracing::Tracer::Global()->Inject(span->context(), writer);
+  span->SetTag("ServiceVersion", 'v1');
 
   auto redis_span = opentracing::Tracer::Global()->StartSpan(
       "social_graph_redis_get_client",
